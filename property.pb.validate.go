@@ -297,18 +297,22 @@ func (m *PropertyType) Validate() error {
 		return nil
 	}
 
-	if l := utf8.RuneCountInString(m.GetID()); l < 3 || l > 40 {
-		return PropertyTypeValidationError{
-			field:  "ID",
-			reason: "value length must be between 3 and 40 runes, inclusive",
-		}
-	}
+	if m.GetID() != "" {
 
-	if !_PropertyType_ID_Pattern.MatchString(m.GetID()) {
-		return PropertyTypeValidationError{
-			field:  "ID",
-			reason: "value does not match regex pattern \"[0-9a-z_-]{3,20}\"",
+		if l := utf8.RuneCountInString(m.GetID()); l < 3 || l > 40 {
+			return PropertyTypeValidationError{
+				field:  "ID",
+				reason: "value length must be between 3 and 40 runes, inclusive",
+			}
 		}
+
+		if !_PropertyType_ID_Pattern.MatchString(m.GetID()) {
+			return PropertyTypeValidationError{
+				field:  "ID",
+				reason: "value does not match regex pattern \"[0-9a-z_-]{3,20}\"",
+			}
+		}
+
 	}
 
 	if l := utf8.RuneCountInString(m.GetName()); l < 3 || l > 60 {
@@ -408,18 +412,22 @@ func (m *Subscription) Validate() error {
 		return nil
 	}
 
-	if l := utf8.RuneCountInString(m.GetID()); l < 3 || l > 40 {
-		return SubscriptionValidationError{
-			field:  "ID",
-			reason: "value length must be between 3 and 40 runes, inclusive",
-		}
-	}
+	if m.GetID() != "" {
 
-	if !_Subscription_ID_Pattern.MatchString(m.GetID()) {
-		return SubscriptionValidationError{
-			field:  "ID",
-			reason: "value does not match regex pattern \"[0-9a-z_-]{3,20}\"",
+		if l := utf8.RuneCountInString(m.GetID()); l < 3 || l > 40 {
+			return SubscriptionValidationError{
+				field:  "ID",
+				reason: "value length must be between 3 and 40 runes, inclusive",
+			}
 		}
+
+		if !_Subscription_ID_Pattern.MatchString(m.GetID()) {
+			return SubscriptionValidationError{
+				field:  "ID",
+				reason: "value does not match regex pattern \"[0-9a-z_-]{3,20}\"",
+			}
+		}
+
 	}
 
 	if l := utf8.RuneCountInString(m.GetPropertyID()); l < 3 || l > 60 {

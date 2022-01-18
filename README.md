@@ -16,4 +16,4 @@ the value of a profile over time.
     
     `mockgen -source=property_grpc.pb.go -self_package=github.com/antinvestor/service-property-api -package=property_v1 -destination=property_grpc_mock.go`
 
-    with that in place update the implementation appropriately
+with that in place update the implementation appropriately

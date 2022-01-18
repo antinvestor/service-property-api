@@ -19,11 +19,11 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PropertyServiceClient interface {
 	//Create method for adding a new property type into the system
-	CreateType(ctx context.Context, in *PropertyType, opts ...grpc.CallOption) (*PropertyType, error)
+	AddPropertyType(ctx context.Context, in *PropertyType, opts ...grpc.CallOption) (*PropertyType, error)
 	//List method for showing all property types in the system
 	ListType(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (PropertyService_ListTypeClient, error)
 	//Create method for adding a new locality into the system
-	CreateLocality(ctx context.Context, in *Locality, opts ...grpc.CallOption) (*Locality, error)
+	AddLocality(ctx context.Context, in *Locality, opts ...grpc.CallOption) (*Locality, error)
 	//Delete method for removing an existing locality from the system
 	DeleteLocality(ctx context.Context, in *RequestID, opts ...grpc.CallOption) (*Locality, error)
 	//Create method for adding a new property into the system
@@ -54,9 +54,9 @@ func NewPropertyServiceClient(cc grpc.ClientConnInterface) PropertyServiceClient
 	return &propertyServiceClient{cc}
 }
 
-func (c *propertyServiceClient) CreateType(ctx context.Context, in *PropertyType, opts ...grpc.CallOption) (*PropertyType, error) {
+func (c *propertyServiceClient) AddPropertyType(ctx context.Context, in *PropertyType, opts ...grpc.CallOption) (*PropertyType, error) {
 	out := new(PropertyType)
-	err := c.cc.Invoke(ctx, "/apis.PropertyService/CreateType", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/apis.PropertyService/AddPropertyType", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -95,9 +95,9 @@ func (x *propertyServiceListTypeClient) Recv() (*PropertyType, error) {
 	return m, nil
 }
 
-func (c *propertyServiceClient) CreateLocality(ctx context.Context, in *Locality, opts ...grpc.CallOption) (*Locality, error) {
+func (c *propertyServiceClient) AddLocality(ctx context.Context, in *Locality, opts ...grpc.CallOption) (*Locality, error) {
 	out := new(Locality)
-	err := c.cc.Invoke(ctx, "/apis.PropertyService/CreateLocality", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/apis.PropertyService/AddLocality", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -268,11 +268,11 @@ func (c *propertyServiceClient) DeleteSubscription(ctx context.Context, in *Requ
 // for forward compatibility
 type PropertyServiceServer interface {
 	//Create method for adding a new property type into the system
-	CreateType(context.Context, *PropertyType) (*PropertyType, error)
+	AddPropertyType(context.Context, *PropertyType) (*PropertyType, error)
 	//List method for showing all property types in the system
 	ListType(*SearchRequest, PropertyService_ListTypeServer) error
 	//Create method for adding a new locality into the system
-	CreateLocality(context.Context, *Locality) (*Locality, error)
+	AddLocality(context.Context, *Locality) (*Locality, error)
 	//Delete method for removing an existing locality from the system
 	DeleteLocality(context.Context, *RequestID) (*Locality, error)
 	//Create method for adding a new property into the system
@@ -300,14 +300,14 @@ type PropertyServiceServer interface {
 type UnimplementedPropertyServiceServer struct {
 }
 
-func (UnimplementedPropertyServiceServer) CreateType(context.Context, *PropertyType) (*PropertyType, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateType not implemented")
+func (UnimplementedPropertyServiceServer) AddPropertyType(context.Context, *PropertyType) (*PropertyType, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPropertyType not implemented")
 }
 func (UnimplementedPropertyServiceServer) ListType(*SearchRequest, PropertyService_ListTypeServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListType not implemented")
 }
-func (UnimplementedPropertyServiceServer) CreateLocality(context.Context, *Locality) (*Locality, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateLocality not implemented")
+func (UnimplementedPropertyServiceServer) AddLocality(context.Context, *Locality) (*Locality, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddLocality not implemented")
 }
 func (UnimplementedPropertyServiceServer) DeleteLocality(context.Context, *RequestID) (*Locality, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteLocality not implemented")
@@ -352,20 +352,20 @@ func RegisterPropertyServiceServer(s grpc.ServiceRegistrar, srv PropertyServiceS
 	s.RegisterService(&PropertyService_ServiceDesc, srv)
 }
 
-func _PropertyService_CreateType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PropertyService_AddPropertyType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PropertyType)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PropertyServiceServer).CreateType(ctx, in)
+		return srv.(PropertyServiceServer).AddPropertyType(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/apis.PropertyService/CreateType",
+		FullMethod: "/apis.PropertyService/AddPropertyType",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PropertyServiceServer).CreateType(ctx, req.(*PropertyType))
+		return srv.(PropertyServiceServer).AddPropertyType(ctx, req.(*PropertyType))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -391,20 +391,20 @@ func (x *propertyServiceListTypeServer) Send(m *PropertyType) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _PropertyService_CreateLocality_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PropertyService_AddLocality_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Locality)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PropertyServiceServer).CreateLocality(ctx, in)
+		return srv.(PropertyServiceServer).AddLocality(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/apis.PropertyService/CreateLocality",
+		FullMethod: "/apis.PropertyService/AddLocality",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PropertyServiceServer).CreateLocality(ctx, req.(*Locality))
+		return srv.(PropertyServiceServer).AddLocality(ctx, req.(*Locality))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -606,12 +606,12 @@ var PropertyService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PropertyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateType",
-			Handler:    _PropertyService_CreateType_Handler,
+			MethodName: "AddPropertyType",
+			Handler:    _PropertyService_AddPropertyType_Handler,
 		},
 		{
-			MethodName: "CreateLocality",
-			Handler:    _PropertyService_CreateLocality_Handler,
+			MethodName: "AddLocality",
+			Handler:    _PropertyService_AddLocality_Handler,
 		},
 		{
 			MethodName: "DeleteLocality",

@@ -29,7 +29,7 @@ message PropertyState {
 }
 
 message PropertyType{
-    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
+    string ID = 1 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
     string name = 2 [(validate.rules).string = {min_len: 3, max_len: 60}];
     string description = 3 [(validate.rules).string = {ignore_empty: true, min_len:50}];
     map<string, string> extra = 4;
@@ -37,7 +37,7 @@ message PropertyType{
 }
 
 message Subscription {
-    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
+    string ID = 1 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
     string propertyID = 2 [(validate.rules).string = {min_len: 3, max_len: 60}];
     string profileID = 3 [(validate.rules).string = {ignore_empty: true, min_len:50}];
     string role = 4 [(validate.rules).string = {ignore_empty: true, min_len:50}];
@@ -47,10 +47,8 @@ message Subscription {
 }
 
 message Property {
-
     string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
     string parentID = 2 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
-
     string name = 3 [(validate.rules).string = {min_len: 3, max_len: 60}];
     string description = 4 [(validate.rules).string = {ignore_empty: true, min_len:50}];
     PropertyType propertyType = 5 [(validate.rules).message.required = true];
@@ -58,7 +56,6 @@ message Property {
     google.protobuf.Timestamp startedAt = 7 [(validate.rules).timestamp.lt_now = true];
     google.protobuf.Timestamp createdAt = 8;
     map<string, string> extra = 9 [(validate.rules).map = {ignore_empty: true, values: {string: {min_len: 3}}}];
-
 }
 
 message RequestID {
@@ -89,13 +86,13 @@ message SubscriptionListRequest{
 service PropertyService {
 
     //Create method for adding a new property type into the system
-    rpc CreateType (PropertyType) returns (PropertyType);
+    rpc AddPropertyType (PropertyType) returns (PropertyType);
 
     //List method for showing all property types in the system
     rpc ListType (SearchRequest) returns (stream PropertyType);
 
     //Create method for adding a new locality into the system
-    rpc CreateLocality (Locality) returns (Locality);
+    rpc AddLocality (Locality) returns (Locality);
 
     //Delete method for removing an existing locality from the system
     rpc DeleteLocality (RequestID) returns (Locality);

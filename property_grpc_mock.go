@@ -36,6 +36,46 @@ func (m *MockPropertyServiceClient) EXPECT() *MockPropertyServiceClientMockRecor
 	return m.recorder
 }
 
+// AddLocality mocks base method.
+func (m *MockPropertyServiceClient) AddLocality(ctx context.Context, in *Locality, opts ...grpc.CallOption) (*Locality, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddLocality", varargs...)
+	ret0, _ := ret[0].(*Locality)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddLocality indicates an expected call of AddLocality.
+func (mr *MockPropertyServiceClientMockRecorder) AddLocality(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddLocality", reflect.TypeOf((*MockPropertyServiceClient)(nil).AddLocality), varargs...)
+}
+
+// AddPropertyType mocks base method.
+func (m *MockPropertyServiceClient) AddPropertyType(ctx context.Context, in *PropertyType, opts ...grpc.CallOption) (*PropertyType, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AddPropertyType", varargs...)
+	ret0, _ := ret[0].(*PropertyType)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddPropertyType indicates an expected call of AddPropertyType.
+func (mr *MockPropertyServiceClientMockRecorder) AddPropertyType(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddPropertyType", reflect.TypeOf((*MockPropertyServiceClient)(nil).AddPropertyType), varargs...)
+}
+
 // AddSubscription mocks base method.
 func (m *MockPropertyServiceClient) AddSubscription(ctx context.Context, in *Subscription, opts ...grpc.CallOption) (*Subscription, error) {
 	m.ctrl.T.Helper()
@@ -56,26 +96,6 @@ func (mr *MockPropertyServiceClientMockRecorder) AddSubscription(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddSubscription", reflect.TypeOf((*MockPropertyServiceClient)(nil).AddSubscription), varargs...)
 }
 
-// CreateLocality mocks base method.
-func (m *MockPropertyServiceClient) CreateLocality(ctx context.Context, in *Locality, opts ...grpc.CallOption) (*Locality, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreateLocality", varargs...)
-	ret0, _ := ret[0].(*Locality)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateLocality indicates an expected call of CreateLocality.
-func (mr *MockPropertyServiceClientMockRecorder) CreateLocality(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateLocality", reflect.TypeOf((*MockPropertyServiceClient)(nil).CreateLocality), varargs...)
-}
-
 // CreateProperty mocks base method.
 func (m *MockPropertyServiceClient) CreateProperty(ctx context.Context, in *Property, opts ...grpc.CallOption) (*PropertyState, error) {
 	m.ctrl.T.Helper()
@@ -94,26 +114,6 @@ func (mr *MockPropertyServiceClientMockRecorder) CreateProperty(ctx, in interfac
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateProperty", reflect.TypeOf((*MockPropertyServiceClient)(nil).CreateProperty), varargs...)
-}
-
-// CreateType mocks base method.
-func (m *MockPropertyServiceClient) CreateType(ctx context.Context, in *PropertyType, opts ...grpc.CallOption) (*PropertyType, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreateType", varargs...)
-	ret0, _ := ret[0].(*PropertyType)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateType indicates an expected call of CreateType.
-func (mr *MockPropertyServiceClientMockRecorder) CreateType(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateType", reflect.TypeOf((*MockPropertyServiceClient)(nil).CreateType), varargs...)
 }
 
 // DeleteLocality mocks base method.
@@ -811,6 +811,36 @@ func (m *MockPropertyServiceServer) EXPECT() *MockPropertyServiceServerMockRecor
 	return m.recorder
 }
 
+// AddLocality mocks base method.
+func (m *MockPropertyServiceServer) AddLocality(arg0 context.Context, arg1 *Locality) (*Locality, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddLocality", arg0, arg1)
+	ret0, _ := ret[0].(*Locality)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddLocality indicates an expected call of AddLocality.
+func (mr *MockPropertyServiceServerMockRecorder) AddLocality(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddLocality", reflect.TypeOf((*MockPropertyServiceServer)(nil).AddLocality), arg0, arg1)
+}
+
+// AddPropertyType mocks base method.
+func (m *MockPropertyServiceServer) AddPropertyType(arg0 context.Context, arg1 *PropertyType) (*PropertyType, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddPropertyType", arg0, arg1)
+	ret0, _ := ret[0].(*PropertyType)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddPropertyType indicates an expected call of AddPropertyType.
+func (mr *MockPropertyServiceServerMockRecorder) AddPropertyType(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddPropertyType", reflect.TypeOf((*MockPropertyServiceServer)(nil).AddPropertyType), arg0, arg1)
+}
+
 // AddSubscription mocks base method.
 func (m *MockPropertyServiceServer) AddSubscription(arg0 context.Context, arg1 *Subscription) (*Subscription, error) {
 	m.ctrl.T.Helper()
@@ -826,21 +856,6 @@ func (mr *MockPropertyServiceServerMockRecorder) AddSubscription(arg0, arg1 inte
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddSubscription", reflect.TypeOf((*MockPropertyServiceServer)(nil).AddSubscription), arg0, arg1)
 }
 
-// CreateLocality mocks base method.
-func (m *MockPropertyServiceServer) CreateLocality(arg0 context.Context, arg1 *Locality) (*Locality, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateLocality", arg0, arg1)
-	ret0, _ := ret[0].(*Locality)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateLocality indicates an expected call of CreateLocality.
-func (mr *MockPropertyServiceServerMockRecorder) CreateLocality(arg0, arg1 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateLocality", reflect.TypeOf((*MockPropertyServiceServer)(nil).CreateLocality), arg0, arg1)
-}
-
 // CreateProperty mocks base method.
 func (m *MockPropertyServiceServer) CreateProperty(arg0 context.Context, arg1 *Property) (*PropertyState, error) {
 	m.ctrl.T.Helper()
@@ -854,21 +869,6 @@ func (m *MockPropertyServiceServer) CreateProperty(arg0 context.Context, arg1 *P
 func (mr *MockPropertyServiceServerMockRecorder) CreateProperty(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateProperty", reflect.TypeOf((*MockPropertyServiceServer)(nil).CreateProperty), arg0, arg1)
-}
-
-// CreateType mocks base method.
-func (m *MockPropertyServiceServer) CreateType(arg0 context.Context, arg1 *PropertyType) (*PropertyType, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateType", arg0, arg1)
-	ret0, _ := ret[0].(*PropertyType)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateType indicates an expected call of CreateType.
-func (mr *MockPropertyServiceServerMockRecorder) CreateType(arg0, arg1 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateType", reflect.TypeOf((*MockPropertyServiceServer)(nil).CreateType), arg0, arg1)
 }
 
 // DeleteLocality mocks base method.
