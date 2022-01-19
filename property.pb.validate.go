@@ -196,6 +196,20 @@ func (m *PropertyState) Validate() error {
 		}
 	}
 
+	if l := utf8.RuneCountInString(m.GetPropertyID()); l < 3 || l > 40 {
+		return PropertyStateValidationError{
+			field:  "PropertyID",
+			reason: "value length must be between 3 and 40 runes, inclusive",
+		}
+	}
+
+	if !_PropertyState_PropertyID_Pattern.MatchString(m.GetPropertyID()) {
+		return PropertyStateValidationError{
+			field:  "PropertyID",
+			reason: "value does not match regex pattern \"[0-9a-z_-]{3,20}\"",
+		}
+	}
+
 	// no validation rules for State
 
 	// no validation rules for Status
@@ -288,6 +302,8 @@ var _ interface {
 } = PropertyStateValidationError{}
 
 var _PropertyState_ID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
+
+var _PropertyState_PropertyID_Pattern = regexp.MustCompile("[0-9a-z_-]{3,20}")
 
 // Validate checks the field values on PropertyType with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
