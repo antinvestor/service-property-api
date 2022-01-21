@@ -446,19 +446,19 @@ func (m *Subscription) Validate() error {
 
 	}
 
-	if l := utf8.RuneCountInString(m.GetPropertyID()); l < 3 || l > 60 {
+	if l := utf8.RuneCountInString(m.GetPropertyID()); l < 3 || l > 40 {
 		return SubscriptionValidationError{
 			field:  "PropertyID",
-			reason: "value length must be between 3 and 60 runes, inclusive",
+			reason: "value length must be between 3 and 40 runes, inclusive",
 		}
 	}
 
 	if m.GetProfileID() != "" {
 
-		if utf8.RuneCountInString(m.GetProfileID()) < 50 {
+		if l := utf8.RuneCountInString(m.GetProfileID()); l < 3 || l > 50 {
 			return SubscriptionValidationError{
 				field:  "ProfileID",
-				reason: "value length must be at least 50 runes",
+				reason: "value length must be between 3 and 50 runes, inclusive",
 			}
 		}
 
@@ -466,10 +466,10 @@ func (m *Subscription) Validate() error {
 
 	if m.GetRole() != "" {
 
-		if utf8.RuneCountInString(m.GetRole()) < 50 {
+		if l := utf8.RuneCountInString(m.GetRole()); l < 3 || l > 50 {
 			return SubscriptionValidationError{
 				field:  "Role",
-				reason: "value length must be at least 50 runes",
+				reason: "value length must be between 3 and 50 runes, inclusive",
 			}
 		}
 

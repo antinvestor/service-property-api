@@ -39,9 +39,9 @@ message PropertyType{
 
 message Subscription {
     string ID = 1 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
-    string propertyID = 2 [(validate.rules).string = {min_len: 3, max_len: 60}];
-    string profileID = 3 [(validate.rules).string = {ignore_empty: true, min_len:50}];
-    string role = 4 [(validate.rules).string = {ignore_empty: true, min_len:50}];
+    string propertyID = 2 [(validate.rules).string = {min_len: 3, max_len: 40}];
+    string profileID = 3 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len:50}];
+    string role = 4 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len:50}];
     map<string, string> extra = 5;
     google.protobuf.Timestamp createdAt = 6;
     google.protobuf.Timestamp expiresAt = 7;
