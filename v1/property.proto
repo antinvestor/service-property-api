@@ -48,7 +48,7 @@ message Subscription {
 }
 
 message Property {
-    string ID = 1 [(validate.rules).string = {min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
+    string ID = 1 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
     string parentID = 2 [(validate.rules).string = {ignore_empty: true, min_len: 3, max_len: 40, pattern: "[0-9a-z_-]{3,20}" }];
     string name = 3 [(validate.rules).string = {min_len: 3, max_len: 60}];
     string description = 4 [(validate.rules).string = {ignore_empty: true, min_len:50}];
