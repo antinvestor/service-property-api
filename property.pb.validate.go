@@ -76,20 +76,6 @@ func (m *Locality) Validate() error {
 
 	}
 
-	if l := utf8.RuneCountInString(m.GetLatLong()); l < 10 || l > 100 {
-		return LocalityValidationError{
-			field:  "LatLong",
-			reason: "value length must be between 10 and 100 runes, inclusive",
-		}
-	}
-
-	if l := utf8.RuneCountInString(m.GetBoundary()); l < 10 || l > 2048 {
-		return LocalityValidationError{
-			field:  "Boundary",
-			reason: "value length must be between 10 and 2048 runes, inclusive",
-		}
-	}
-
 	if l := utf8.RuneCountInString(m.GetName()); l < 3 || l > 60 {
 		return LocalityValidationError{
 			field:  "Name",
@@ -118,6 +104,42 @@ func (m *Locality) Validate() error {
 				cause:  err,
 			}
 		}
+	}
+
+	switch m.Location.(type) {
+
+	case *Locality_Point:
+
+		if m.GetPoint() != "" {
+
+			if l := utf8.RuneCountInString(m.GetPoint()); l < 10 || l > 100 {
+				return LocalityValidationError{
+					field:  "Point",
+					reason: "value length must be between 10 and 100 runes, inclusive",
+				}
+			}
+
+		}
+
+	case *Locality_Boundary:
+
+		if m.GetBoundary() != "" {
+
+			if l := utf8.RuneCountInString(m.GetBoundary()); l < 10 || l > 2048 {
+				return LocalityValidationError{
+					field:  "Boundary",
+					reason: "value length must be between 10 and 2048 runes, inclusive",
+				}
+			}
+
+		}
+
+	default:
+		return LocalityValidationError{
+			field:  "Location",
+			reason: "value is required",
+		}
+
 	}
 
 	return nil
