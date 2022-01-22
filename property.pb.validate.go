@@ -106,7 +106,7 @@ func (m *Locality) Validate() error {
 		}
 	}
 
-	switch m.Location.(type) {
+	switch m.Feature.(type) {
 
 	case *Locality_Point:
 
@@ -136,7 +136,7 @@ func (m *Locality) Validate() error {
 
 	default:
 		return LocalityValidationError{
-			field:  "Location",
+			field:  "Feature",
 			reason: "value is required",
 		}
 
