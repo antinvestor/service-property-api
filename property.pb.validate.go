@@ -76,6 +76,13 @@ func (m *Locality) Validate() error {
 
 	}
 
+	if l := utf8.RuneCountInString(m.GetLatLong()); l < 10 || l > 100 {
+		return LocalityValidationError{
+			field:  "LatLong",
+			reason: "value length must be between 10 and 100 runes, inclusive",
+		}
+	}
+
 	if l := utf8.RuneCountInString(m.GetBoundary()); l < 10 || l > 2048 {
 		return LocalityValidationError{
 			field:  "Boundary",
